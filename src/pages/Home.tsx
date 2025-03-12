@@ -234,91 +234,88 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative w-full h-[80vh] md:h-[90vh] bg-cover bg-center">
-        <div className="absolute inset-0">
-          <div className="relative h-full">
-            {slides[language].map((slide, index) => (
-              <motion.div
-                key={index}
-                className={`absolute inset-0 ${
-                  index === currentSlide ? 'opacity-100' : 'opacity-0'
-                } transition-opacity duration-1000 ease-in-out`}
-              >
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="max-w-7xl mx-auto px-4 md:px-12 text-center">
-                    <motion.h1
-                      className="text-3xl md:text-5xl font-bold text-white mb-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5 }}
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section with Slider - Changed height */}
+      <div className="relative h-[600px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div 
+              className="relative h-full bg-cover bg-center bg-no-repeat"
+              style={{ 
+                backgroundImage: `url(${slides[language][currentSlide].image})`
+              }}
+            >
+              <div className="absolute inset-0 bg-black/50">
+                <div className="max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+                  <motion.h1 
+                    className="text-3xl md:text-5xl font-bold text-white mb-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {slides[language][currentSlide].title}
+                  </motion.h1>
+                  <motion.p 
+                    className="text-lg md:text-xl text-white mb-6 max-w-3xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    {slides[language][currentSlide].description}
+                  </motion.p>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <Link
+                      to={slides[language][currentSlide].buttonLink || '/contact'}
+                      className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors text-base border border-blue-400 shadow-md"
                     >
-                      {slide.title}
-                    </motion.h1>
-                    <motion.p
-                      className="text-lg md:text-xl text-white mb-8 max-w-2xl mx-auto"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      {slide.description}
-                    </motion.p>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.4 }}
-                    >
-                      <Link
-                        to={slide.buttonLink}
-                        className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-base md:text-lg font-semibold z-10 relative"
-                      >
-                        {slide.buttonText}
-                      </Link>
-                    </motion.div>
-                  </div>
+                      {slides[language][currentSlide].buttonText}
+                    </Link>
+                  </motion.div>
                 </div>
-              </motion.div>
-            ))}
-
-            {/* Navigation Buttons */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex items-center justify-between px-4 md:px-8 pointer-events-none">
-              <button
-                onClick={prevSlide}
-                className="bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 md:p-3 rounded-full transform transition-transform hover:scale-110 focus:outline-none pointer-events-auto"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 md:p-3 rounded-full transform transition-transform hover:scale-110 focus:outline-none pointer-events-auto"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-              </button>
+              </div>
             </div>
+          </motion.div>
+        </AnimatePresence>
 
-            {/* Slide Indicators */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
-              {slides[language].map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
-                    index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="h-8 w-8" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="h-8 w-8" />
+        </button>
+
+        {/* Slide indicators - Moved up slightly */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+          {slides[language].map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                index === currentSlide ? 'bg-white' : 'bg-white/50'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
 
@@ -501,68 +498,108 @@ const Home = () => {
       </div>
 
       {/* Services Section */}
-      <div className="py-12 md:py-16">
+      <motion.div 
+        className="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
           >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              {t('home.services.title')}
+            </h2>
+            <div className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-blue-700 mx-auto rounded-full" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {services.map((service, index) => (
               <motion.div
-                key={index}
+                key={service.title}
+                className="relative bg-white rounded-2xl p-8 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-sm border border-gray-100"
                 variants={serviceCardVariants}
-                className="relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
               >
-                <div className="p-6">
-                  <service.icon className="h-12 w-12 text-blue-600 mb-4" />
-                  <motion.div variants={cardContentVariants}>
-                    <h3 className="text-xl md:text-2xl font-semibold mb-3">
+                {/* Icon */}
+                <motion.div
+                  className="mb-8"
+                  variants={cardContentVariants}
+                >
+                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
+                    <service.icon className="h-7 w-7 text-blue-600" />
+                  </div>
+                </motion.div>
+
+                {/* Content */}
+                <motion.div
+                  className="space-y-4 h-full flex flex-col"
+                  variants={cardContentVariants}
+                >
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 text-sm md:text-base">
+                    <p className="text-gray-600 leading-relaxed h-[120px] overflow-hidden">
                       {service.description}
                     </p>
+                  </div>
+                  
+                  <div className="mt-auto pt-4">
                     <Link
                       to={service.link}
-                      className="inline-block text-blue-600 hover:text-blue-700 font-medium group relative"
+                      className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-semibold group"
                     >
-                      <span className="flex items-center">
+                      <span className="relative">
                         {service.buttonText || (language === 'el' ? 'Μάθετε περισσότερα...' : 'Learn more...')}
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                       </span>
                     </Link>
-                  </motion.div>
-                </div>
+                  </div>
+                </motion.div>
+
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-50 to-transparent opacity-50 rounded-tr-2xl pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-50 to-transparent opacity-50 rounded-bl-2xl pointer-events-none" />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Why Choose Us Section */}
-      <div className="py-12 md:py-16 bg-gray-50">
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2 
-            className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 gradient-text"
+            className="text-3xl font-bold text-center mb-12 gradient-text"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
             {t('home.whyChooseUs.title')}
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {(t('home.whyChooseUs.features') as FeatureItem[]).map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-4 md:p-6 rounded-lg shadow-lg hover-card"
+                className="bg-white p-6 rounded-lg shadow-lg hover-card"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <h3 className="text-lg md:text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm md:text-base">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -570,23 +607,23 @@ const Home = () => {
       </div>
 
       {/* Certifications Section */}
-      <div className="bg-white py-12 md:py-16">
+      <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12">
             {t('home.certifications.title')}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left Column */}
             <motion.div
-              className="bg-gray-50 p-4 md:p-8 rounded-lg overflow-x-auto"
+              className="bg-gray-50 p-8 rounded-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <ul className="space-y-3 min-w-[300px]">
+              <ul className="space-y-3">
                 {certifications[language].column1.map((cert, index) => (
-                  <li key={index} className="flex items-start text-sm md:text-base">
-                    <span className="text-blue-600 mr-2 flex-shrink-0">•</span>
+                  <li key={index} className="flex items-start">
+                    <span className="text-blue-600 mr-2">•</span>
                     <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: cert }}></span>
                   </li>
                 ))}
@@ -595,15 +632,15 @@ const Home = () => {
 
             {/* Right Column */}
             <motion.div
-              className="bg-gray-50 p-4 md:p-8 rounded-lg overflow-x-auto"
+              className="bg-gray-50 p-8 rounded-lg"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <ul className="space-y-3 min-w-[300px]">
+              <ul className="space-y-3">
                 {certifications[language].column2.map((cert, index) => (
-                  <li key={index} className="flex items-start text-sm md:text-base">
-                    <span className="text-blue-600 mr-2 flex-shrink-0">•</span>
+                  <li key={index} className="flex items-start">
+                    <span className="text-blue-600 mr-2">•</span>
                     <span className="text-gray-700" dangerouslySetInnerHTML={{ __html: cert }}></span>
                   </li>
                 ))}
