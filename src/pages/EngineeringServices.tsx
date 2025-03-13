@@ -1,31 +1,25 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
-  CheckCircle2, 
-  Award, 
-  Ruler, 
-  FileText, 
-  Zap, 
-  Home, 
-  Paintbrush,
-  Video, 
-  Building, 
-  Lightbulb, 
-  BadgeCheck,
-  Users, 
-  ClipboardCheck 
+  CheckCircle2, Award, Ruler, FileText, Building, 
+  Lightbulb, Zap, ClipboardCheck, Users, BadgeCheck, Home, Palette, Video 
 } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useLanguage } from '../context/LanguageContext';
 import backofficeImage from '../assets/images/backoffice.png';
-import floorImage from '../assets/images/floor.jpg';
 import photo1 from '../assets/images/photo1.png';
 import photo2 from '../assets/images/photo2.png';
-import { Link } from 'react-router-dom';
+import bb3Image from '../assets/images/bb3.jpg';
+
+interface CeoItem {
+  category: string;
+  details: string[];
+}
 
 const EngineeringServices = () => {
-  const { t } = useTranslation();
   const { language } = useLanguage();
+  const { t } = useTranslation();
 
   useEffect(() => {
     document.title = t('engineeringServices.title');
@@ -33,201 +27,263 @@ const EngineeringServices = () => {
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', language === 'el'
-        ? 'Ολοκληρωμένες υπηρεσίες μηχανικού στην Κομοτηνή. Στατικές μελέτες, ενεργειακός σχεδιασμός, επιβλέψεις έργων, εκτιμήσεις ακινήτων και τεχνικές πραγματογνωμοσύνες. Πιστοποιημένος Ελεγκτής Δόμησης.'
-        : 'Comprehensive engineering services in Komotini, Greece. Structural studies, energy design, construction supervision, real estate valuations and technical expertise. Certified Building Inspector.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = language === 'el'
-        ? 'Ολοκληρωμένες υπηρεσίες μηχανικού στην Κομοτηνή. Στατικές μελέτες, ενεργειακός σχεδιασμός, επιβλέψεις έργων, εκτιμήσεις ακινήτων και τεχνικές πραγματογνωμοσύνες. Πιστοποιημένος Ελεγκτής Δόμησης.'
-        : 'Comprehensive engineering services in Komotini, Greece. Structural studies, energy design, construction supervision, real estate valuations and technical expertise. Certified Building Inspector.';
-      document.head.appendChild(meta);
+        ? 'Ολοκληρωμένες υπηρεσίες μηχανικού στην Κομοτηνή. Στατικές μελέτες, ενεργειακός σχεδιασμός, επιβλέψεις έργων.'
+        : 'Comprehensive engineering services in Komotini. Structural studies, energy design, construction supervision.');
     }
   }, [language, t]);
 
-  const services = [
-    'Αρχιτεκτονικός σχεδιασμός και αρχιτεκτονική μελέτη – επίβλεψη',
-    'Έκδοση πλήρους φακέλου οικοδομικής άδειας και επίβλεψη του έργου',
-    'Έκδοση αδειών λειτουργίας υγειονομικού ενδιαφέροντος παντός τύπου',
-    'Ενεργειακή επιθεώρηση – ένταξη στο πρόγραμμα "εξοικονομώ κατ\'οίκον"',
-    'Ελεγκτής δόμησης',
-    'Ανακαινίσεις διαμερισμάτων και καταστημάτων',
-    'Διακόσμηση εσωτερικών χώρων',
-    'Φωτορεαλισμός και virtual video'
-  ];
-
-  const experience = [
-    '17 ετής συνεχής εμπειρία στον Τομέα Στατικών Μελετών',
-    '5 ετής εμπειρία στον τομέα του Ενεργειακού Σχεδιασμού',
-    'Πιστοποιημένος Ελεγκτής Δόμησης',
-    '17 ετής εμπειρία στην Κατασκευή Ιδιωτικών Έργων',
-    '8 ετής εμπειρία στον Τομέα Εκτιμήσεων Ακινήτων',
-    'Εμπειρία σε Τεχνικές Πραγματογνωμοσύνες',
-    'Μέλος της Μόνιμης Επιτροπής Χωροταξίας και Περιβάλλοντος του ΤΕΕ Θράκης'
-  ];
+  const renderBoldText = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/).map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={index} className="text-gray-900">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative w-full h-[50vh] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${backofficeImage})` }}>
+      <div className="relative h-[60vh] bg-cover bg-center" style={{ backgroundImage: `url(${backofficeImage})` }}>
         <div className="absolute inset-0 bg-black bg-opacity-50" />
-        <div className="relative h-full flex flex-col justify-center items-center text-center text-white">
-          <motion.h1 className="text-5xl font-bold mb-4" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
+        <div className="relative h-full max-w-7xl mx-auto px-4 flex flex-col justify-center">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             {t('engineeringServices.title')}
           </motion.h1>
-          <motion.p className="text-2xl" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-            {t('engineeringServices.description')}
+          <motion.p 
+            className="text-xl text-white max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            {t('engineeringServices.subtitle')}
           </motion.p>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4">
-        <motion.div className="bg-white rounded-xl shadow-lg p-10 mb-12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-          <h2 className="text-3xl font-bold mb-8 text-blue-700 border-b pb-4">
-            ARCHInima – Αρχιτεκτονικό Γραφείο
-          </h2>
-          <div className="flex items-center space-x-4">
-            <img src={photo1} alt="ARCHInima" className="w-1/2 h-auto rounded-lg" />
-            <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line space-y-6">
-              <p>
-                Με σπουδές στη Σχολή <strong>Αριστοτελείου Πανεπιστημίου</strong> Θεσσαλονίκης (2000-2007) και μια φρέσκια, δημιουργική ματιά στην ελληνική αρχιτεκτονική και οικοδομική πραγματικότητα, ξεκίνησα το ταξίδι μου στον κόσμο του σχεδιασμού. Η βαθιά σύνδεσή μου με την πλούσια και μακρόχρονη κατασκευαστική παράδοση της οικογένειάς μου αποτέλεσε πολύτιμο εφόδιο στα πρώτα μου βήματα, δίπλα σε έναν έμπειρο αρχιτέκτονα, ο οποίος μου μετέδωσε ανεκτίμητες γνώσεις. Αυτή η εμπειρία με οδήγησε στη δημιουργία του δικού μου αρχιτεκτονικού γραφείου, το ARCHInima.
-              </p>
-              <p>
-                Μαζί με τον αδελφό μου, Ιωάννη Μαυρίδη, πολιτικό μηχανικό (<strong>MSc Structural Engineering</strong>, <strong>Univ. of Surrey, UK</strong>), και τις πολύτιμες συμβουλές του πατέρα μας, Ανέστη Μαυρίδη, μηχανικού με <strong>30 χρόνια εμπειρίας</strong> στον κατασκευαστικό τομέα, αναλαμβάνουμε το έργο σας από την αρχή έως την ολοκλήρωσή του.
-              </p>
-              <p>
-                Αναλαμβάνουμε:
-                <ul className="list-disc list-inside">
-                  <li>✔️ Αρχιτεκτονικό σχεδιασμό</li>
-                  <li>✔️ Μελέτη & προϋπολογισμό</li>
-                  <li>✔️ Κατασκευή & διαχείριση έργου</li>
-                  <li>✔️ Εσωτερική διακόσμηση</li>
-                  <li>✔️ Ολοκληρωμένη καθοδήγηση προς την υλοποίηση κάθε οράματος</li>
-                </ul>
-              </p>
-              <p>
-                Το ομαδικό πνεύμα, η θέληση και η φιλική διάθεση που μας χαρακτηρίζουν δημιουργούν έναν δεσμό εμπιστοσύνης με τους ανθρώπους που μας επιλέγουν. Για εμάς, η πραγματική επιτυχία δεν βρίσκεται μόνο στην ολοκλήρωση ενός έργου, αλλά στη δημιουργία σχέσεων που αντέχουν στον χρόνο.
-              </p>
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        {/* About ARCHInima Section */}
+        <motion.div 
+          className="bg-white rounded-xl shadow-lg overflow-hidden mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8">
+              <h2 className="text-3xl font-bold mb-6">ARCHInima</h2>
+              <div className="prose prose-lg max-w-none text-gray-600">
+                <p className="mb-4">
+                  {language === 'el' 
+                    ? 'Με σπουδές στη Σχολή Αριστοτελείου Πανεπιστημίου Θεσσαλονίκης (2000-2007) και μια φρέσκια, δημιουργική ματιά στην ελληνική αρχιτεκτονική και οικοδομική πραγματικότητα, ξεκίνησα το ταξίδι μου στον κόσμο του σχεδιασμού.'
+                    : 'With studies at the Aristotle University of Thessaloniki (2000-2007) and a fresh, creative perspective on Greek architectural and construction reality, I began my journey in the world of design.'}
+                </p>
+                
+                <p className="mb-6">
+                  {language === 'el'
+                    ? 'Μαζί με τον αδελφό μου, Ιωάννη Μαυρίδη, πολιτικό μηχανικό (MSc Structural Engineering, Univ. of Surrey, UK), και τις πολύτιμες συμβουλές του πατέρα μας, Ανέστη Μαυρίδη, μηχανικού με 30 χρόνια εμπειρίας στον κατασκευαστικό τομέα, αναλαμβάνουμε το έργο σας από την αρχή έως την ολοκλήρωσή του.'
+                    : 'Together with my brother, Ioannis Mavridis, civil engineer (MSc Structural Engineering, Univ. of Surrey, UK), and the valuable advice of our father, Anestis Mavridis, an engineer with 30 years of experience in the construction sector, we undertake your project from start to finish.'}
+                </p>
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    {language === 'el' ? 'Αναλαμβάνουμε:' : 'We undertake:'}
+                  </h3>
+                  <ul className="space-y-4">
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                      <span>
+                        {language === 'el' 
+                          ? renderBoldText('**Αρχιτεκτονικό σχεδιασμό**')
+                          : renderBoldText('**Architectural design**')}
+                      </span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                      <span>
+                        {language === 'el'
+                          ? renderBoldText('**Μελέτη & προϋπολογισμό**')
+                          : renderBoldText('**Study & budget**')}
+                      </span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                      <span>
+                        {language === 'el'
+                          ? renderBoldText('**Κατασκευή & διαχείριση έργου**')
+                          : renderBoldText('**Construction & project management**')}
+                      </span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                      <span>
+                        {language === 'el'
+                          ? renderBoldText('**Εσωτερική διακόσμηση**')
+                          : renderBoldText('**Interior decoration**')}
+                      </span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                      <span>
+                        {language === 'el'
+                          ? renderBoldText('**Ολοκληρωμένη καθοδήγηση προς την υλοποίηση κάθε οράματος**')
+                          : renderBoldText('**Complete guidance towards realizing every vision**')}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                <p className="text-gray-600">
+                  {language === 'el'
+                    ? 'Το ομαδικό πνεύμα, η θέληση και η φιλική διάθεση που μας χαρακτηρίζουν δημιουργούν έναν δεσμό εμπιστοσύνης με τους ανθρώπους που μας επιλέγουν. Για εμάς, η πραγματική επιτυχία δεν βρίσκεται μόνο στην ολοκλήρωση ενός έργου, αλλά στη δημιουργία σχέσεων που αντέχουν στον χρόνο.'
+                    : 'The team spirit, willingness, and friendly attitude that characterize us create a bond of trust with the people who choose us. For us, real success lies not only in completing a project but in creating relationships that stand the test of time.'}
+                </p>
+              </div>
+            </div>
+            <div className="relative h-full min-h-[300px]">
+              <img 
+                src={photo1} 
+                alt="ARCHInima Office" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
           </div>
         </motion.div>
 
-        {/* Νέο Κείμενο για Γιάννη Μαυρίδη */}
+        {/* CEO Section */}
         <motion.div className="bg-white rounded-xl shadow-lg p-10 mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-blue-700">Γιάννης Μαυρίδης, Company CEO</h2>
+          <h2 className="text-3xl font-bold mb-4 text-blue-700">
+            {renderBoldText(t('engineeringServices.ceo.title'))}
+          </h2>
           <div className="flex items-center space-x-4">
             <img src={photo2} alt="Γιάννης Μαυρίδης" className="w-1/2 h-auto rounded-lg" />
             <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line space-y-6">
-              <ul className="list-disc list-inside">
-                <li><strong>17 ετής συνεχής εμπειρία</strong> στον Τομέα Στατικών Μελετών Αντισεισμικού Σχεδιασμού και Κατασκευής Κτιρίων από Οπλισμένο Σκυρόδεμα, με επιπλέον εξειδίκευση στον Σχεδιασμό κατά τις Διάβρωσης Σκυροδέματος.</li>
-                <li><strong>5 ετής εμπειρία</strong> στον τομέα του Ενεργειακού Σχεδιασμού κατά <strong>ΚΕΝΑΚ</strong>, και στις ενεργειακές μελέτες και Ενεργειακές Επιθεωρήσεις. Διεκπεραίωση προγράμματος «<strong>Εξοικονομώ κατ Οίκον</strong>».</li>
-                <li><strong>Πιστοποιημένος Ελεγκτής</strong> Δόμησης της μεγαλύτερης κατηγορίας Έργων.</li>
-                <li><strong>17 ετής εμπειρία</strong> στην Κατασκευή Ιδιωτικών Έργων – <strong>6 ετής εμπειρία</strong> στον τομέα Δημοσίων Έργων.</li>
-                <li><strong>8 ετής εμπειρία</strong> στον Τομέα Εκτιμήσεων Ακινήτων (Πανελλήνια Τράπεζα, Ασπίς Τράπεζα, Αγροτική Τράπεζα, Τράπεζα Πειραιώς).</li>
-                <li>Εμπειρία σε Τεχνικές Πραγματογνωμοσύνες (ΤΕΕ Θράκης, ιδιωτών, Δικαστηρίων).</li>
-                <li>Μέλος της Μόνιμης Επιτροπής Χωροταξίας και Περιβάλλοντος του ΤΕΕ Θράκης.</li>
-                <li>Άδειες Δόμησης, Άδειες λειτουργίας Καταστημάτων, Καταστημάτων Υγειονομικού Ενδιαφέροντος, Βιοτεχνιών, Μεταποιητικών επιχειρήσεων, Άδειες διατήρησης σταύλων(μαντριών).</li>
-                <li><strong>Πιστοποιημένος Επιθεωρητής Καταλυμμάτων</strong> για Κατηγοριοποίηση Ξενοδοχειακών Μονάδων (Αστεροποίηση) / Ενοικιαζόμενων Δωματίων (Κλειδιά) <strong>TUV Austria</strong>.</li>
+              <ul className="list-disc list-inside space-y-4">
+                {(t('engineeringServices.ceo.items') as string[]).map((item: string, index: number) => (
+                  <li key={index} className="text-gray-700">
+                    {renderBoldText(item)}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </motion.div>
 
-        {/* Experience Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        {/* About Us Section */}
+        <motion.div 
+          className="bg-white rounded-xl shadow-lg overflow-hidden mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-2xl font-bold mb-8 text-center gradient-text">
-            {t('engineeringServices.experience.title')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {t('engineeringServices.experience.items').map((item, index) => (
-              <motion.div
-                key={index}
+          <div className="relative py-16 bg-cover bg-center" style={{ backgroundImage: `url(${bb3Image})` }}>
+            <div className="absolute inset-0 bg-black bg-opacity-60" />
+            <div className="relative max-w-7xl mx-auto px-4 text-center">
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold text-white mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, backgroundColor: '#F0FDF4' }}
-                className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
-                <div className="p-3 bg-green-100 rounded-lg">
-                  {index === 0 && <Award className="h-6 w-6 text-green-600" />}
-                  {index === 1 && <Lightbulb className="h-6 w-6 text-green-600" />}
-                  {index === 2 && <BadgeCheck className="h-6 w-6 text-green-600" />}
-                  {index === 3 && <Building className="h-6 w-6 text-green-600" />}
-                  {index === 4 && <FileText className="h-6 w-6 text-green-600" />}
-                  {index === 5 && <ClipboardCheck className="h-6 w-6 text-green-600" />}
-                  {index === 6 && <Users className="h-6 w-6 text-green-600" />}
-                </div>
-                <span className="text-gray-700 font-medium">{item}</span>
+                {t('engineeringServices.aboutUs.title')}
+              </motion.h2>
+              
+              <motion.p 
+                className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                {t('engineeringServices.aboutUs.description')}
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <Link 
+                  to="/about-us" 
+                  className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200"
+                >
+                  {language === 'el' ? 'Μάθετε περισσότερα' : 'Learn more'}
+                </Link>
               </motion.div>
-            ))}
+            </div>
           </div>
         </motion.div>
 
-        {/* Δεύτερη Hero Section */}
-        <div className="relative w-full h-96 mt-12">
-          <img 
-            src={floorImage}
-            alt="Hero Background"
-            className="absolute inset-0 w-full h-full object-cover rounded-lg"
-          />
-          <div className="absolute inset-0 bg-black opacity-30 rounded-lg"></div>
-          <div className="relative z-10 flex flex-col items-center justify-center h-full">
-            <h1 className="text-4xl font-bold text-white mb-4">
-              {t('engineeringServices.officeInfo.title')}
-            </h1>
-            <p className="text-lg text-white mb-8 text-center">
-              {t('engineeringServices.officeInfo.description')}
-            </p>
-            <Link 
-              to="/about-us"
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-semibold"
+        {/* Experience Section */}
+        <div className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.h2 
+              className="text-3xl font-bold text-center text-blue-600 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
             >
-              {t('engineeringServices.officeInfo.readMore')}
-            </Link>
+              {t('engineeringServices.experienceTitle')}
+            </motion.h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {t('engineeringServices.experienceItems').map((item: string, index: number) => (
+                <motion.div 
+                  key={index}
+                  className="bg-white rounded-lg shadow-lg p-6 flex items-start gap-4"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-green-100 p-2 rounded-lg">
+                    {/* ... εικονίδιο ... */}
+                  </div>
+                  <p className="text-gray-700">{item}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Υπηρεσίες Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl font-bold mb-8 text-center gradient-text">
-            {t('engineeringServices.services.title')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {t('engineeringServices.services.items').map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, backgroundColor: '#EEF2FF' }}
-                className="flex items-start space-x-4 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
-              >
-                <div className="p-3 bg-blue-100 rounded-lg">
-                  {index === 0 && <Ruler className="h-6 w-6 text-blue-600" />}
-                  {index === 1 && <FileText className="h-6 w-6 text-blue-600" />}
-                  {index === 2 && <ClipboardCheck className="h-6 w-6 text-blue-600" />}
-                  {index === 3 && <Zap className="h-6 w-6 text-blue-600" />}
-                  {index === 4 && <Building className="h-6 w-6 text-blue-600" />}
-                  {index === 5 && <Home className="h-6 w-6 text-blue-600" />}
-                  {index === 6 && <Paintbrush className="h-6 w-6 text-blue-600" />}
-                  {index === 7 && <Video className="h-6 w-6 text-blue-600" />}
-                </div>
-                <span className="text-gray-700 font-medium">{service}</span>
-              </motion.div>
-            ))}
+        {/* Our Services Section */}
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4">
+            <motion.h2 
+              className="text-3xl font-bold text-center text-blue-600 mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              {t('engineeringServices.servicesTitle')}
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {t('engineeringServices.servicesItems').map((service: string, index: number) => (
+                <motion.div 
+                  key={index}
+                  className="bg-white rounded-lg shadow-lg p-6 flex items-start gap-4"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="bg-blue-100 p-2 rounded-lg">
+                    {/* ... εικονίδιο ... */}
+                  </div>
+                  <p className="text-gray-700">{service}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -288,39 +288,47 @@ export const translations = {
     },
     engineeringServices: {
       title: 'Υπηρεσίες Μηχανικού',
+      subtitle: 'Ολοκληρωμένες λύσεις για κάθε κατασκευαστικό έργο',
       description: 'Ολοκληρωμένες υπηρεσίες μηχανικού στην Κομοτηνή.',
-      officeInfo: {
-        title: 'Λίγα λόγια για το γραφείο μας',
-        description: 'Ανακαλύψτε την ιστορία μας και τις αξίες που μας καθοδηγούν στην παροχή υπηρεσιών.',
-        readMore: 'Διαβάστε περισσότερα',
+      aboutUs: {
+        title: 'Σχετικά με εμάς',
+        description: 'Ανακαλύψτε την ιστορία μας και τις αξίες που μας καθοδηγούν στην παροχή υπηρεσιών.'
       },
-      services: {
-        title: 'Οι Υπηρεσίες μας',
+      experienceTitle: 'Η Εμπειρία μας',
+      experienceItems: [
+        '17 ετής συνεχής εμπειρία στον Τομέα Στατικών Μελετών',
+        '5 ετής εμπειρία στον τομέα του Ενεργειακού Σχεδιασμού',
+        'Πιστοποιημένος Ελεγκτής Δόμησης',
+        '17 ετής εμπειρία στην Κατασκευή Ιδιωτικών Έργων',
+        '8 ετής εμπειρία στον Τομέα Εκτιμήσεων Ακινήτων',
+        'Εμπειρία σε Τεχνικές Πραγματογνωμοσύνες',
+        'Μέλος της Μόνιμης Επιτροπής Χωροταξίας και Περιβάλλοντος του ΤΕΕ Θράκης'
+      ],
+      servicesTitle: 'Οι Υπηρεσίες μας',
+      servicesItems: [
+        'Αρχιτεκτονικός σχεδιασμός και αρχιτεκτονική μελέτη - επίβλεψη',
+        'Έκδοση πλήρους φακέλου οικοδομικής άδειας και επίβλεψη του έργου',
+        'Έκδοση αδειών λειτουργίας υγειονομικού ενδιαφέροντος παντός τύπου',
+        'Ενεργειακή επιθεώρηση - ένταξη στο πρόγραμμα "εξοικονομώ κατ\'οίκον"',
+        'Ελεγκτής δόμησης',
+        'Ανακαινίσεις διαμερισμάτων και καταστημάτων',
+        'Διακόσμηση εσωτερικών χώρων',
+        'Φωτορεαλισμός και virtual video'
+      ],
+      ceo: {
+        title: 'Γιάννης Μαυρίδης, Διευθύνων Σύμβουλος',
         items: [
-          'Αρχιτεκτονικός σχεδιασμός και αρχιτεκτονική μελέτη – επίβλεψη',
-          'Έκδοση πλήρους φακέλου οικοδομικής άδειας και επίβλεψη του έργου',
-          'Έκδοση αδειών λειτουργίας υγειονομικού ενδιαφέροντος παντός τύπου',
-          'Ενεργειακή επιθεώρηση – ένταξη στο πρόγραμμα "εξοικονομώ κατ\'οίκον"',
-          'Ελεγκτής δόμησης',
-          'Ανακαινίσεις διαμερισμάτων και καταστημάτων',
-          'Διακόσμηση εσωτερικών χώρων',
-          'Φωτορεαλισμός και virtual video'
+          '**17 ετής συνεχής εμπειρία** στον Τομέα Στατικών Μελετών Αντισεισμικού Σχεδιασμού και Κατασκευής Κτιρίων από Οπλισμένο Σκυρόδεμα, με επιπλέον εξειδίκευση στον Σχεδιασμό κατά της Διάβρωσης Σκυροδέματος.',
+          '**5 ετής εμπειρία** στον τομέα του Ενεργειακού Σχεδιασμού κατά ΚΕΝΑΚ, και στις Ενεργειακές Μελέτες και Ενεργειακές Επιθεωρήσεις. Διεκπεραίωση προγράμματος «**Εξοικονομώ κατ\' Οίκον**».',
+          '**Πιστοποιημένος Ελεγκτής Δόμησης** της μεγαλύτερης κατηγορίας Έργων.',
+          '**17 ετής εμπειρία** στην Κατασκευή Ιδιωτικών Έργων – **6 ετής εμπειρία** στον τομέα Δημοσίων Έργων.',
+          '**8 ετής εμπειρία** στον Τομέα Εκτιμήσεων Ακινήτων (Πανελλήνια Τράπεζα, Ασπίς Τράπεζα, Αγροτική Τράπεζα, Τράπεζα Πειραιώς).',
+          'Εμπειρία σε Τεχνικές Πραγματογνωμοσύνες (ΤΕΕ Θράκης, ιδιωτών, Δικαστηρίων).',
+          'Μέλος της Μόνιμης Επιτροπής Χωροταξίας και Περιβάλλοντος του ΤΕΕ Θράκης.',
+          'Άδειες Δόμησης, Άδειες λειτουργίας Καταστημάτων, Καταστημάτων Υγειονομικού Ενδιαφέροντος, Βιοτεχνιών, Μεταποιητικών επιχειρήσεων, Άδειες διατήρησης σταύλων.',
+          '**Πιστοποιημένος Επιθεωρητής Καταλυμμάτων** για Κατηγοριοποίηση Ξενοδοχειακών Μονάδων (Αστεροποίηση) / Ενοικιαζόμενων Δωματίων (Κλειδιά) **TUV Austria**'
         ]
-      },
-      experience: {
-        title: 'Η Εμπειρία μας',
-        items: [
-          '17 ετής συνεχής εμπειρία στον Τομέα Στατικών Μελετών',
-          '5 ετής εμπειρία στον τομέα του Ενεργειακού Σχεδιασμού',
-          'Πιστοποιημένος Ελεγκτής Δόμησης',
-          '17 ετής εμπειρία στην Κατασκευή Ιδιωτικών Έργων',
-          '8 ετής εμπειρία στον Τομέα Εκτιμήσεων Ακινήτων',
-          'Εμπειρία σε Τεχνικές Πραγματογνωμοσύνες',
-          'Μέλος της Μόνιμης Επιτροπής Χωροταξίας και Περιβάλλοντος του ΤΕΕ Θράκης'
-        ]
-      },
-      architectOffice: 'ARCHInima – Αρχιτεκτονικό Γραφείο',
-      ceo: 'Γιάννης Μαυρίδης, Διευθύνων Σύμβουλος'
+      }
     },
     blog: {
       title: {
@@ -524,7 +532,7 @@ export const translations = {
           ]
         },
         specialized: {
-          title: 'Specialized Works',
+          title: 'Specialized Services',
           items: [
             'Mechanical network design',
             'Electrical works',
@@ -566,7 +574,7 @@ export const translations = {
         ]
       },
       certifications: {
-        title: 'Professional Certifications',
+        title: 'Certifications',
         expertValuer: {
           title: 'Expert Valuer In Real Estate Property (REV) TEGoVA',
           items: [
@@ -756,39 +764,47 @@ export const translations = {
     },
     engineeringServices: {
       title: 'Engineering Services',
+      subtitle: 'Comprehensive solutions for every construction project',
       description: 'Comprehensive engineering services in Komotini.',
-      officeInfo: {
-        title: 'A Few Words About Our Office',
-        description: 'Discover our story and the values that guide us in providing services.',
-        readMore: 'Read More',
+      aboutUs: {
+        title: 'About Us',
+        description: 'Discover our story and the values that guide us in providing services.'
       },
-      services: {
-        title: 'Our Services',
+      experienceTitle: 'Our Experience',
+      experienceItems: [
+        '17 years of continuous experience in Structural Studies',
+        '5 years of experience in Energy Design',
+        'Certified Building Inspector',
+        '17 years of experience in Private Construction Projects',
+        '8 years of experience in Real Estate Valuations',
+        'Experience in Technical Expertise',
+        'Member of the Permanent Committee for Spatial Planning and Environment'
+      ],
+      servicesTitle: 'Our Services',
+      servicesItems: [
+        'Architectural design and supervision',
+        'Complete building permit documentation and project supervision',
+        'Health-related business operation licenses of all types',
+        'Energy inspection - inclusion in the "Energy Saving at Home" program',
+        'Building Inspector',
+        'Apartment and store renovations',
+        'Interior design',
+        'Photorealism and virtual video'
+      ],
+      ceo: {
+        title: 'Giannis Mavridis, CEO',
         items: [
-          'Architectural design and architectural study – supervision',
-          'Issuance of a complete building permit file and supervision of the project',
-          'Issuance of health interest operation permits of all types',
-          'Energy inspection – inclusion in the "Energy Saving at Home" program',
-          'Building inspector',
-          'Renovations of apartments and shops',
-          'Interior decoration',
-          'Photorealism and virtual video'
+          '**17 years of continuous experience** in Seismic Design of Reinforced Concrete Buildings, with additional specialization in Concrete Corrosion Prevention Design.',
+          '**5 years experience** in Energy Design according to KENAK, Energy Studies and Energy Inspections. Implementation of "**Energy Saving at Home**" program.',
+          '**Certified Building Inspector** of the highest category of Projects.',
+          '**17 years experience** in Private Construction Projects - **6 years experience** in Public Works.',
+          '**8 years experience** in Real Estate Valuations (Panellinia Bank, Aspis Bank, Agricultural Bank, Piraeus Bank).',
+          'Experience in Technical Expertise (TEE Thrace, private individuals, Courts).',
+          'Member of the **Permanent Committee for Spatial Planning and Environment** of **TEE Thrace**.',
+          '**Building Permits**, **Business Operation Licenses**, **Health-Related Establishments**, **Craft Industries**, **Manufacturing Companies**, **Stable Maintenance Permits**.',
+          '**Certified Accommodation Inspector** for **Hotel Unit Classification** (Star Rating) / **Rental Rooms** (Keys) **TUV Austria**'
         ]
-      },
-      experience: {
-        title: 'Our Experience',
-        items: [
-          '17 years of continuous experience in Structural Studies',
-          '5 years of experience in Energy Design',
-          'Certified Building Inspector',
-          '17 years of experience in Private Construction Projects',
-          '8 years of experience in Real Estate Valuations',
-          'Experience in Technical Expertise',
-          'Member of the Permanent Committee for Spatial Planning and Environment'
-        ]
-      },
-      architectOffice: 'ARCHInima – Architectural Office',
-      ceo: 'Giannis Mavridis, Company CEO'
+      }
     },
     blog: {
       title: {
@@ -813,7 +829,7 @@ export const translations = {
       location: {
         el: [
           'Η εταιρεία μας εδρεύει στην Κομοτηνή, πρωτεύουσα της Θράκης, στη Βόρεια Ελλάδα.',
-          'Η περιοχή μας συνορεύει με τη Βουλγαρία στα βόρεια (15 χλμ. σύνορα) και με την Τουρκία στα ανατολικά (80 χλμ. σύνορα). Η Θεσσαλονίκη, το δεύτερο μεγαλύτερο οικονομικό κέντρο της Ελλάδας, απέχει 270 χλμ. (2 ώρες μέσω αυτοκινητόδρομου). Το Πλόβντιβ, το δεύτερο μεγαλύτερο οικονομικό κέντρο της Βουλγαρίας, απέχει 1,5 ώρα οδικώς, ενώ η Κωνσταντινούπολη είναι προσβάσιμη σε 3,5 ώρες με αυτοκίνητο, με καθημερινές διεθνείς συγκοινωνίες, συμπεριλαμβανομένης σύνδεσης με το Αεροδρόμιο Ατατούρκ.',
+          'Η περιοχή μας συνορεύει με τη Βουλγαρία στα βόρεια (15 χλμ. σύνορα) και με την Τουρκία στα ανατολικά (80 χλμ. σύνορα). Η Θεσσαλονίκη, το δεύτερο μεγαλύτερο οικονομικό κέντρο της Ελλάδας, απέχει 270χλμ. (2ώρες μέσω αυτοκινητόδρομου). Το Πλόβντιβ, το δεύτερο μεγαλύτερο οικονομικό κέντρο της Βουλγαρίας, απέχει 1,5ώρες οδικώς, ενώ η Κωνσταντινούπολη είναι προσβάσιμη σε 3,5ώρες με αυτοκίνητο, με καθημερινές διεθνείς συγκοινωνίες, συμπεριλαμβανομένης σύνδεσης με το Αεροδρόμιο Ατατούρκ.',
           'Αυτά τα χαρακτηριστικά τοποθετούν τη Θράκη στο επίκεντρο μιας αναδυόμενης τουριστικής αγοράς...'
         ],
         en: [
