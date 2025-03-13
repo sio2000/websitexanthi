@@ -155,20 +155,39 @@ const EngineeringServices = () => {
         </motion.div>
 
         {/* CEO Section */}
-        <motion.div className="bg-white rounded-xl shadow-lg p-10 mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-blue-700">
-            {renderBoldText(t('engineeringServices.ceo.title'))}
-          </h2>
-          <div className="flex items-center space-x-4">
-            <img src={photo2} alt="Γιάννης Μαυρίδης" className="w-1/2 h-auto rounded-lg" />
-            <div className="text-gray-700 leading-relaxed text-lg whitespace-pre-line space-y-6">
-              <ul className="list-disc list-inside space-y-4">
-                {(t('engineeringServices.ceo.items') as string[]).map((item: string, index: number) => (
-                  <li key={index} className="text-gray-700">
-                    {renderBoldText(item)}
-                  </li>
-                ))}
-              </ul>
+        <motion.div 
+          className="bg-white rounded-xl shadow-lg overflow-hidden mb-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="relative h-full min-h-[300px]">
+              <img 
+                src={photo2} 
+                alt="Γιάννης Μαυρίδης" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+            <div className="p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">
+                {t('engineeringServices.ceo.title')}
+              </h2>
+              <div className="prose prose-lg max-w-none">
+                <ul className="space-y-4 list-none pl-0">
+                  {(t('engineeringServices.ceo.items') as string[]).map((item: string, index: number) => (
+                    <li 
+                      key={index} 
+                      className="flex items-start space-x-3 text-gray-700"
+                    >
+                      <CheckCircle2 className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1" />
+                      <span className="flex-1">
+                        {renderBoldText(item)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -220,10 +239,10 @@ const EngineeringServices = () => {
         </motion.div>
 
         {/* Experience Section */}
-        <div className="py-16 bg-gray-50">
+        <div className="py-16">
           <div className="max-w-7xl mx-auto px-4">
             <motion.h2 
-              className="text-3xl font-bold text-center text-blue-600 mb-12"
+              className="text-4xl font-bold text-blue-600 text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -231,21 +250,33 @@ const EngineeringServices = () => {
               {t('engineeringServices.experienceTitle')}
             </motion.h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {t('engineeringServices.experienceItems').map((item: string, index: number) => (
                 <motion.div 
                   key={index}
-                  className="bg-white rounded-lg shadow-lg p-6 flex items-start gap-4"
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   whileHover={{ y: -5 }}
-                  transition={{ duration: 0.2 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  <div className="bg-green-100 p-2 rounded-lg">
-                    {/* ... εικονίδιο ... */}
+                  <div className="flex items-start p-6 space-x-4">
+                    <div className="w-12 h-12 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0">
+                      {index === 0 && <Award className="h-6 w-6 text-green-600" />}
+                      {index === 1 && <Lightbulb className="h-6 w-6 text-green-600" />}
+                      {index === 2 && <BadgeCheck className="h-6 w-6 text-green-600" />}
+                      {index === 3 && <Building className="h-6 w-6 text-green-600" />}
+                      {index === 4 && <FileText className="h-6 w-6 text-green-600" />}
+                      {index === 5 && <ClipboardCheck className="h-6 w-6 text-green-600" />}
+                      {index === 6 && <Users className="h-6 w-6 text-green-600" />}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-lg text-gray-700 leading-relaxed">
+                        {renderBoldText(item)}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700">{item}</p>
                 </motion.div>
               ))}
             </div>
